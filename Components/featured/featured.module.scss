@@ -1,0 +1,18 @@
+.featured {
+    width: 100%;
+    height: max-content;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .wrapperComponent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 1300px;
+        gap: 22px;
+    }
+}

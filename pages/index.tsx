@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Navbar from '@/Components/navbar/Navbar'
 import Header from '@/Components/header/Header'
+import Featured from '@/Components/featured/Featured'
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       </Head>
       <Navbar />
       <Header />
+      <Featured />
     </>
   )
 }

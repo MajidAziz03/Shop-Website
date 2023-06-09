@@ -1,0 +1,32 @@
+.wrapper {
+    background-image: url('https://images.pexels.com/photos/14880025/pexels-photo-14880025.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex: 0.3;
+    height: 500px;
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+
+        span {
+            font-size: 38px;
+            color: #FFFF;
+        }
+
+        button {
+            padding: 13px 12px;
+            color: #222;
+            border: 1px solid #999999c4;
+            cursor: pointer;
+        }
+    }
+}
