@@ -1,5 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz@6..12&display=swap');
+
 .navbar {
     width: 100%;
     height: 60px;
-    
+    background-color: lightblue;
+    color: #222;
+    display: flex;
+
+    .left {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        padding-left: 22px;
+
+        .search {
+            width: 50%;
+            border: 1px solid #999999c9;
+            display: flex;
+            height: 37px;
+            border-radius: 5px;
+            overflow: hidden;
+
+            input {
+                width: 80%;
+                border: none;
+                outline: none;
+                padding: 0px 12px;
+            }
+            .iconSearch{
+                width: 20%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .middle {
+        flex: 2;
+        background-color: rgb(65, 57, 57);
+    }
+
+    .right {
+        flex: 1;
+        background-color: khaki;
+    }
 }
