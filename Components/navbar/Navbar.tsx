@@ -1,5 +1,5 @@
 import { Search, ShoppingCart } from '@mui/icons-material';
-import styles from '../../styles/navbar.module.scss'
+import styles from './navbar.module.scss';
 
 const Navbar = () => {
     return (
@@ -18,8 +18,8 @@ const Navbar = () => {
                 <span className={styles.buttonsRight}> SIGNUP </span>
                 <div className={styles.logoRight}>
                     <ShoppingCart className={styles.iconRight} />
-                    <div className={styles.number}>  
-                    <span> 3 </span>
+                    <div className={styles.number}>
+                        <span> 3 </span>
                     </div>
                 </div>
             </div>

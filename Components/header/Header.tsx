@@ -1,9 +1,9 @@
-import styles from '../../styles/header.module.scss';
+import styles from './header.module.scss';
 
 const Header = () => {
     return (
         <div className={styles.header}>
-            
+
         </div>
     )
 }
