@@ -1,18 +1,19 @@
-import React from 'react'
-import styles from './products.module.scss';
 import Product from './productsComponent/Product';
+import styles from './products.module.scss';
 
 const Products = () => {
     return (
         <div className={styles.products}>
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
+            <div className={styles.productsWrapper}>
+                <Product />
+                <Product />
+                <Product />
+                <Product />
+                <Product />
+                <Product />
+                <Product />
+                <Product />
+            </div>
         </div>
     )
 }

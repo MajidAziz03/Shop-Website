@@ -3,6 +3,7 @@ import Navbar from '@/Components/navbar/Navbar'
 import Header from '@/Components/header/Header'
 import Featured from '@/Components/featured/Featured'
 import Announcement from '@/Components/announcement/Announcement'
+import Products from '@/Components/products/Products'
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <Navbar />
       <Header />
       <Featured />
+      <Products />
     </>
   )
 }
