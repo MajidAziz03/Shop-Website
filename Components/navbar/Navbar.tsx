@@ -1,5 +1,5 @@
 import { Search, ShoppingCart } from '@mui/icons-material';
-import styles from './navbar.module.scss';
+import styles from '../../styles/navbar.module.scss'
 
 const Navbar = () => {
     return (
