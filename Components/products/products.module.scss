@@ -14,3 +14,53 @@
         gap: 22px;
     }
 }
+
+.pagination {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    list-style: none;
+
+    .activeLink {
+        padding: 8px 10px;
+        border-radius: 2px;
+        background-color: #78bc24;
+        color: #FFFF;
+        cursor: pointer;
+    }
+
+    .nextLink {
+        cursor: pointer;
+        padding: 8px 10px;
+        &:hover {
+            background-color: #78bc24;
+            color: #FFFF;
+            text-decoration: underline;
+        }
+    }
+
+    .prevLink {
+        cursor: pointer;
+        padding: 8px 10px;
+        &:hover {
+            background-color: #78bc24;
+            color: #FFFF;
+            text-decoration: underline;
+        }
+    }
+
+    .pageLink {
+        padding: 8px 10px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #78bc24;
+            color: #FFFF;
+            text-decoration: underline;
+        }
+    }
+}
