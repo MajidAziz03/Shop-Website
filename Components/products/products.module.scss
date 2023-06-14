@@ -1,17 +1,15 @@
 .products {
     width: 100%;
+    height: max-content;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 70vh;
-    max-height: max-content;
-    height: 100%;
 
     .productsWrapper {
-        width: 100%;
-        max-width: 1800px;
-        align-items: center;
+        width: 90%;
+        height: max-content;
         display: flex;
+        align-items: center;
         flex-wrap: wrap;
         gap: 22px;
     }

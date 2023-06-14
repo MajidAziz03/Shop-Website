@@ -4,7 +4,7 @@ import styles from './products.module.scss';
 const Products = () => {
     return (
         <div className={styles.products}>
-            <div className={styles.productsWrapper}>
+        <div className={styles.productsWrapper}>
                 <Product />
                 <Product />
                 <Product />
@@ -13,7 +13,9 @@ const Products = () => {
                 <Product />
                 <Product />
                 <Product />
-            </div>
+                <Product />
+                <Product />
+        </div>
         </div>
     )
 }
