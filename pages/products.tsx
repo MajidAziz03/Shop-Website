@@ -3,14 +3,22 @@ import Navbar from '@/Components/navbar/Navbar';
 import Products from '@/Components/products/Products';
 import styles from '../styles/productPage.module.scss';
 import { ExpandMore } from '@mui/icons-material';
-import { getProducts } from '@/functions/productFunction';
+import { getProducts, getProductsCategory } from '@/functions/productFunction';
 import { ProductType } from '@/types/productType';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const ProductsPage = () => {
-    const [productsData, setProductsData] = useState<ProductType[]>([])
-    const [removeRepeated, setRemoveRepeated] = useState<ProductType[]>([])
     const [categories, setCategories] = useState<string[]>([])
+    const [cat, setCat] = useState<string>('')
+
+    useEffect(() => {
+        getProductsCategory().then(data => setCategories(data))
+    }, [])
+
+    const handleCataegoryClick = (item : string) => {
+        setCat(item)
+    }
 
     return (
         <>
@@ -19,9 +27,9 @@ const ProductsPage = () => {
             <div className={styles.productWhole}>
                 <div className={styles.sliderProduct}>
                     {
-                        removeRepeated.map((item) => (
+                        categories.map((item) => (
                             <>
-                            <span> {item.category} </span>
+                            <div className={styles.categoriesItem} onClick={()=> {handleCataegoryClick(item)}}> {item} </div>
                             </>
                         ))
                     }
@@ -37,7 +45,7 @@ const ProductsPage = () => {
                         <div className={styles.singleFilter}></div>
                     </div>
                     <div>
-                        <Products />
+                        <Products category = {cat}  />
                     </div>
                 </div>
             </div>

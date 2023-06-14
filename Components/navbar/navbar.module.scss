@@ -7,6 +7,9 @@
     display: flex;
     font-family: 'Nunito', sans-serif;
     background-color: white;
+    position: sticky;
+    top: 0;
+    z-index: 20;
 
     .left {
         flex: 2;

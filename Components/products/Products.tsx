@@ -1,13 +1,18 @@
 import Product from './productsComponent/Product';
 import styles from './products.module.scss';
 import { useEffect, useState } from 'react';
-import { getProducts } from '@/functions/productFunction';
+import { getProducts, instance, instanceCategory } from '@/functions/productFunction';
 import { ProductType } from '@/types/productType';
 import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 
-const Products = () => {
+interface Props {
+    category: string;
+}
+
+const Products = ({ category }: Props) => {
     const [productsData, setProductsData] = useState<ProductType[]>([])
+    const [renderData, setRenderData] = useState<ProductType[]>([])
     const path = useRouter().pathname;
     const itemsPerPage = 12;
     const [itemOffset, setItemOffset] = useState(0);
@@ -19,29 +24,40 @@ const Products = () => {
         if (path === '/') {
             getProducts().then(data => setProductsData(data.slice(0, 8)))
         }
-        else {
+        if (path !== '/') {
             getProducts().then(data => setProductsData(data))
+            getProducts().then(data => setRenderData(data))
         }
     }, [])
 
-    const handlePageClick = (event : any) => {
+
+    const categoryFilter = () => {
+        let results;
+        results = renderData;
+
+        if(category) {
+            
+        }
+    }
+
+    const handlePageClick = (event: any) => {
         const newOffset = (event.selected * itemsPerPage) % productsData.length;
         setItemOffset(newOffset);
     };
 
     return (
         <>
-        <div className={styles.products}>
-            <div className={styles.productsWrapper}>
-                {
-                    paginatedProducts.map((item: ProductType, i: number) => (
-                        <>
-                            <Product key={i} products={item} />
-                        </>
-                    ))
-                }
+            <div className={styles.products}>
+                <div className={styles.productsWrapper}>
+                    {
+                        paginatedProducts.map((item: ProductType, i: number) => (
+                            <>
+                                <Product key={i} products={item} />
+                            </>
+                        ))
+                    }
+                </div>
             </div>
-        </div>
             <ReactPaginate
                 breakLabel="..."
                 nextLabel="next >"
@@ -51,10 +67,10 @@ const Products = () => {
                 previousLabel="< previous"
                 renderOnZeroPageCount={null}
                 className={styles.pagination}
-                activeLinkClassName = {styles.activeLink}
-                nextLinkClassName = {styles.nextLink}
+                activeLinkClassName={styles.activeLink}
+                nextLinkClassName={styles.nextLink}
                 previousLinkClassName={styles.prevLink}
-                pageLinkClassName = {styles.pageLink}
+                pageLinkClassName={styles.pageLink}
             />
         </>
     )
