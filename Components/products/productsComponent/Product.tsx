@@ -1,17 +1,18 @@
 import { Star } from '@mui/icons-material';
 import styles from './Product.module.scss';
+import { ProductType } from '@/types/productType';
 
-const Product = () => {
+const Product = ({products} : ProductType) => {
     return (
         <div className={styles.product}>
             <div className={styles.image}>
-                <img src="https://images.pexels.com/photos/14421162/pexels-photo-14421162.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
+                <img src={products.thumbnail} alt="" />
             </div>
             <div className={styles.info}>
-                <span className={styles.title}> Iphone 12 </span>
+                <span className={styles.title}>{products.title} </span>
                 <div className={styles.price}>
-                    <span> Rs. 549.00  </span>
-                    <span className={styles.discountPrice}> 572.00 </span>
+                    <span> Rs.{(products.price - products.discountPercentage).toFixed(2)}  </span>
+                    <span className={styles.discountPrice}> {products.price.toFixed(2)} </span>
                 </div>
                 <div className={styles.rating}>
                     <span> <Star className={styles.star} />  </span>
