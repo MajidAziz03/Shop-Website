@@ -18,11 +18,11 @@ const ProductsPage = () => {
         getProductsCategory().then(data => setCategories(data))
     }, [])
 
-    const handleCataegoryClick = (item : string, type:string) => {
-        if(item !== '' && type !=='view') {
+    const handleCataegoryClick = (item: string, type: string) => {
+        if (item !== '' && type !== 'view') {
             setCat(item)
         }
-        if(type === 'view') {
+        if (type === 'view') {
             setCat("view")
         }
     }
@@ -33,18 +33,21 @@ const ProductsPage = () => {
             <Navbar />
             <div className={styles.productWhole}>
                 <div className={styles.sliderProduct}>
-                <div className={styles.categoriesItem} onClick={()=> handleCataegoryClick("view")}> View All </div>
+                    <div className={styles.categoriesItem} onClick={() => handleCataegoryClick("view")}> View All </div>
                     {
                         categories.map((item) => (
                             <>
-                            <div className={styles.categoriesItem} onClick={()=> {handleCataegoryClick(item)}}> {item} </div>
+                                <div className={styles.categoriesItem} onClick={() => { handleCataegoryClick(item) }}> {item} </div>
                             </>
                         ))
                     }
                 </div>
                 <div className={styles.productPage}>
+                    <div style={{ paddingLeft: "78px" }}>
+                        <ProductFilter />
+                    </div>
                     <div>
-                        <Products category = {cat} />
+                        <Products category={cat} />
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import Featured from '@/Components/featured/Featured'
 import Announcement from '@/Components/announcement/Announcement'
 import Products from '@/Components/products/Products'
 import { useState } from 'react'
+import ProductFilter from '@/Components/products/productsfilter/ProductFilter'
 
 export default function Home() {
   const [fromHome, setFromHome] = useState(true)
