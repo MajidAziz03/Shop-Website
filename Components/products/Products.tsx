@@ -1,16 +1,17 @@
 import Product from './productsComponent/Product';
 import styles from './products.module.scss';
 import { useEffect, useState } from 'react';
-import { getProducts, instance, instanceCategory } from '@/functions/productFunction';
+import { getProducts, instance,} from '@/functions/productFunction';
 import { ProductType } from '@/types/productType';
 import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 
 interface Props {
     category: string;
+    viewAll : boolean;
 }
 
-const Products = ({ category }: Props) => {
+const Products = ({ category, viewAll }: Props) => {
     const [productsData, setProductsData] = useState<ProductType[]>([])
     const [renderData, setRenderData] = useState<ProductType[]>([])
     const path = useRouter().pathname;
@@ -30,15 +31,22 @@ const Products = ({ category }: Props) => {
         }
     }, [])
 
-
     const categoryFilter = () => {
         let results;
         results = renderData;
 
-        if(category) {
-            
+        if(category && category !== '') {
+            results = results.filter(item => item.category.includes(category))
         }
+        if(category && category === 'view') {
+            results = renderData;
+        }
+        setProductsData(results)
     }
+
+    useEffect(() => {
+        categoryFilter()
+    }, [category])
 
     const handlePageClick = (event: any) => {
         const newOffset = (event.selected * itemsPerPage) % productsData.length;

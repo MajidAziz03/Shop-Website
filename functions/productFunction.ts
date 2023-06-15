@@ -4,10 +4,6 @@ export const instance  = axios.create({
     baseURL : "https://dummyjson.com/products?limit=100&skip=0"
 })
 
-export const instanceCategory  = axios.create({
-    baseURL : "https://dummyjson.com/products/categories/"
-})
-
 export const getProducts = async() => {
     try {
         const res = await instance.get('')

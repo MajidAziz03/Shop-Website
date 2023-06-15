@@ -20,7 +20,7 @@ const Product = ({products} : ProductType) => {
                     <span> <Star className={styles.star}/>  </span>
                     <span> <Star className={styles.star}/>  </span>
                 </div>
-                <span className={styles.brand}>Apple</span>
+                <span className={styles.brand}>{products.brand}</span>
             </div>
         </div>
     )

@@ -7,17 +7,24 @@ import { getProducts, getProductsCategory } from '@/functions/productFunction';
 import { ProductType } from '@/types/productType';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import ProductFilter from '@/Components/products/productsfilter/ProductFilter';
 
 const ProductsPage = () => {
     const [categories, setCategories] = useState<string[]>([])
     const [cat, setCat] = useState<string>('')
+    const [brands, setBrands] = useState<Array<string>>([])
 
     useEffect(() => {
         getProductsCategory().then(data => setCategories(data))
     }, [])
 
-    const handleCataegoryClick = (item : string) => {
-        setCat(item)
+    const handleCataegoryClick = (item : string, type:string) => {
+        if(item !== '' && type !=='view') {
+            setCat(item)
+        }
+        if(type === 'view') {
+            setCat("view")
+        }
     }
 
     return (
@@ -26,6 +33,7 @@ const ProductsPage = () => {
             <Navbar />
             <div className={styles.productWhole}>
                 <div className={styles.sliderProduct}>
+                <div className={styles.categoriesItem} onClick={()=> handleCataegoryClick("view")}> View All </div>
                     {
                         categories.map((item) => (
                             <>
@@ -35,17 +43,8 @@ const ProductsPage = () => {
                     }
                 </div>
                 <div className={styles.productPage}>
-                    <div className={styles.filter}>
-                        <div className={styles.singleFilter}>
-                            <span className={styles.filterSize}> Size </span>
-                            <span> <ExpandMore className={styles.expandIcon} /> </span>
-                        </div>
-                        <div className={styles.singleFilter}></div>
-                        <div className={styles.singleFilter}></div>
-                        <div className={styles.singleFilter}></div>
-                    </div>
                     <div>
-                        <Products category = {cat}  />
+                        <Products category = {cat} />
                     </div>
                 </div>
             </div>
