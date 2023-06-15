@@ -1,17 +1,17 @@
 import Product from './productsComponent/Product';
 import styles from './products.module.scss';
 import { useEffect, useState } from 'react';
-import { getProducts, instance,} from '@/functions/productFunction';
+import { getProducts, instance, } from '@/functions/productFunction';
 import { ProductType } from '@/types/productType';
 import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 
 interface Props {
     category: string;
-    viewAll : boolean;
+    fromHome: boolean;
 }
 
-const Products = ({ category, viewAll }: Props) => {
+const Products = ({ category, fromHome }: Props) => {
     const [productsData, setProductsData] = useState<ProductType[]>([])
     const [renderData, setRenderData] = useState<ProductType[]>([])
     const path = useRouter().pathname;
@@ -22,10 +22,10 @@ const Products = ({ category, viewAll }: Props) => {
     const pageCount = Math.ceil(productsData.length / itemsPerPage);
 
     useEffect(() => {
-        if (path === '/') {
+        if (fromHome) {
             getProducts().then(data => setProductsData(data.slice(0, 8)))
         }
-        if (path !== '/') {
+        else {
             getProducts().then(data => setProductsData(data))
             getProducts().then(data => setRenderData(data))
         }
@@ -35,10 +35,10 @@ const Products = ({ category, viewAll }: Props) => {
         let results;
         results = renderData;
 
-        if(category && category !== '') {
+        if (category && category !== '') {
             results = results.filter(item => item.category.includes(category))
         }
-        if(category && category === 'view') {
+        if (category && category === 'view') {
             results = renderData;
         }
         setProductsData(results)
@@ -66,20 +66,24 @@ const Products = ({ category, viewAll }: Props) => {
                     }
                 </div>
             </div>
-            <ReactPaginate
-                breakLabel="..."
-                nextLabel="next >"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                previousLabel="< previous"
-                renderOnZeroPageCount={null}
-                className={styles.pagination}
-                activeLinkClassName={styles.activeLink}
-                nextLinkClassName={styles.nextLink}
-                previousLinkClassName={styles.prevLink}
-                pageLinkClassName={styles.pageLink}
-            />
+            {
+                !fromHome
+                &&
+                <ReactPaginate
+                    breakLabel="..."
+                    nextLabel="next >"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={pageCount}
+                    previousLabel="< previous"
+                    renderOnZeroPageCount={null}
+                    className={styles.pagination}
+                    activeLinkClassName={styles.activeLink}
+                    nextLinkClassName={styles.nextLink}
+                    previousLinkClassName={styles.prevLink}
+                    pageLinkClassName={styles.pageLink}
+                />
+            }
         </>
     )
 }
