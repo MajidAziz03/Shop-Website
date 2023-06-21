@@ -1,4 +1,7 @@
-export const LoginUser = (email: string, password: string, message: React.Dispatch<React.SetStateAction<string>>) => {
+import { useAppDispatch } from "@/redux/hooks"
+import { userSuccess } from "@/redux/slices/userSlice"
+
+export const LoginUser = (email: string, password: string, message: React.Dispatch<React.SetStateAction<string>>, disptach : any) => {
     if (email || password == '') {
         message("Invalid credentials")
     }
