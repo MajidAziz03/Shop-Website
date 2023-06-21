@@ -23,6 +23,7 @@ const LoginUser = async (email: string, password: string) => {
         })
         const response = await res.json()
         disptach(userSuccess(response))
+        
     }
     catch (error : any) {
         console.log("error", error)
