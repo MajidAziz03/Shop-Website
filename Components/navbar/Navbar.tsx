@@ -2,6 +2,7 @@ import { Search, ShoppingCart } from '@mui/icons-material';
 import styles from './navbar.module.scss';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Navbar = () => {
     const path = useRouter().pathname;
@@ -27,7 +28,7 @@ const Navbar = () => {
                 <h3> LOGO. </h3>
             </div>
             <div className={styles.right}>
-                <span className={styles.buttonsRight}> LOGIN </span>
+                <Link style={{textDecoration : "none", color : "inherit"}} href={'/user/login'}><span className={styles.buttonsRight}> LOGIN </span></Link>
                 <span className={styles.buttonsRight}> SIGNUP </span>
                 <div className={styles.logoRight}>
                     <ShoppingCart className={styles.iconRight} />
