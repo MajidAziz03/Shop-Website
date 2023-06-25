@@ -4,10 +4,11 @@
 import { brand_filters } from '@/types/productType';
 
 interface I_Props {
-  filters : (e: React.ChangeEvent<HTMLInputElement>) => void
+  filters : (e: React.ChangeEvent<HTMLInputElement>) => void;
+  brandsFilter : string[]
 }
 
-    const ProductFilter = ({filters} : I_Props) => {
+    const ProductFilter = ({filters,brandsFilter} : I_Props) => {
       const [brandCollapse, setBrandCollapse] = useState(false)
       const [priceCollapse, setPriceCollapse] = useState(false)
       const [ratingCollapse, setRatingCollapse] = useState(false)
@@ -67,7 +68,7 @@ interface I_Props {
                   return (
                     <>
                     <div key={i} className={styles.filterBrand}>
-                    <input type="checkbox" className={styles.checkbox} onChange={filters} value={item}/>
+                    <input type="checkbox" className={styles.checkbox} onChange={filters} value={item} checked={brandsFilter.includes(item)} />
                     <label>{item} </label>
                     </div>
                     </>
