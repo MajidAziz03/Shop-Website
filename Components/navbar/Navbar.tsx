@@ -25,7 +25,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className={styles.middle}>
-                <h3> LOGO. </h3>
+            <Link style={{textDecoration : "none", color : "inherit"}} href={'/'}><h3> LOGO. </h3> </Link>
             </div>
             <div className={styles.right}>
                 <Link style={{textDecoration : "none", color : "inherit"}} href={'/user/login'}><span className={styles.buttonsRight}> LOGIN </span></Link>

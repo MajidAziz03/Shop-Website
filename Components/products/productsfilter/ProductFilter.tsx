@@ -70,8 +70,8 @@ interface I_Props {
                   return (
                     <>
                     <div key={i} className={styles.filterBrand}>
-                    <input type="checkbox" className={styles.checkbox} onChange={filters} value={item} checked={brandsFilter.includes(item)} />
-                    <label>{item} </label>
+                    <input id={`brands_${i}`} type="checkbox" className={styles.checkbox} onChange={filters} value={item} checked={brandsFilter.includes(item)} />
+                    <label htmlFor={`brands_${i}`}>{item} </label>
                     </div>
                     </>
                   )
