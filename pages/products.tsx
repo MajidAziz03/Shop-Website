@@ -14,6 +14,7 @@ const ProductsPage = () => {
     const [cat, setCat] = useState<string>('')
     const [brands, setBrands] = useState<Array<string>>([])
 
+
     useEffect(() => {
         getProductsCategory().then(data => setCategories(data))
     }, [])
@@ -26,6 +27,19 @@ const ProductsPage = () => {
             setCat("view")
         }
     }
+
+    const handleFilters = (e : React.ChangeEvent<HTMLInputElement>) => {
+        const checked = e.target.checked;
+        const value = e.target.value;
+        if(checked && brands.indexOf(value == -1)) {
+            setBrands([...brands, value])
+        }
+        else {
+            setBrands(brands.filter(item => item !== value))
+        } 
+    }
+
+
 
     return (
         <>
@@ -44,10 +58,10 @@ const ProductsPage = () => {
                 </div>
                 <div className={styles.productPage}>
                     <div style={{ paddingLeft: "78px" }}>
-                        <ProductFilter />
+                        <ProductFilter filters = {handleFilters}/>
                     </div>
                     <div>
-                        <Products category={cat} />
+                        <Products category={cat} brandsFilter = {brands} />
                     </div>
                 </div>
             </div>

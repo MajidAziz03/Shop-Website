@@ -6,4 +6,8 @@ export interface ProductType {
     rating: number;
     thumbnail: string;
     category: string;
+    brand : string;
 }
+
+
+export const brand_filters = ["Apple", "Samsung", "OPPO"]

@@ -1,8 +1,13 @@
     import { ArrowDownward, ExpandMore } from '@mui/icons-material';
     import styles from './productFilter.module.scss';
     import { useState } from 'react';
+import { brand_filters } from '@/types/productType';
 
-    const ProductFilter = () => {
+interface I_Props {
+  filters : (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+    const ProductFilter = ({filters} : I_Props) => {
       const [brandCollapse, setBrandCollapse] = useState(false)
       const [priceCollapse, setPriceCollapse] = useState(false)
       const [ratingCollapse, setRatingCollapse] = useState(false)
@@ -57,10 +62,18 @@
             brandCollapse
             &&
             <div className={styles.expanded} onMouseLeave={() => { handleMouseLeave("brand") }}>
-              <div className={styles.filterBrand}>
-                <input type="checkbox" className={styles.checkbox} />
-                <label> Apple </label>
-              </div>
+              {
+                brand_filters.map((item, i) => {
+                  return (
+                    <>
+                    <div key={i} className={styles.filterBrand}>
+                    <input type="checkbox" className={styles.checkbox} onChange={filters} value={item}/>
+                    <label>{item} </label>
+                    </div>
+                    </>
+                  )
+                })
+              }
             </div>
           }
           {
