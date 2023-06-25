@@ -36,32 +36,35 @@ const Products = ({ category, fromHome, brandsFilter }: Props) => {
         let results;
         results = renderData;
 
-        if (category && category !== '') {
+        if (category && category !== 'view') {
             results = results.filter(item => item.category.includes(category))
+        }
+        if(brandsFilter && brandsFilter.length > 0) {
+            results = results.filter(item => brandsFilter.includes(item.brand))
         }
         if (category && category === 'view') {
             results = renderData;
         }
-        setProductsData(results)
-    }
-
-    const brandFilteration = () => {
-        let results;
-        results = renderData;
-
-        if (brandsFilter) {
-            results = results.filter(item => brandsFilter.includes(item.brand))
-        }
-        if(brandsFilter.length == 0) {
-            results = renderData;
-        }
-        setProductsData(results)
         // console.log("res", results)
+        setProductsData(results)
     }
+
+    // const brandFilteration = () => {
+    //     let results;
+    //     results = renderData;
+
+    //     if (brandsFilter) {
+    //         results = results.filter(item => brandsFilter.includes(item.brand))
+    //     }
+    //     if(brandsFilter.length == 0) {
+    //         results = renderData;
+    //     }
+    //     setProductsData(results)
+    // }
 
     useEffect(() => {
         categoryFilter()
-        brandFilteration()
+        // brandFilteration()
     }, [category, brandsFilter])
 
     const handlePageClick = (event: any) => {

@@ -61,7 +61,7 @@ const ProductsPage = () => {
                         <ProductFilter filters = {handleFilters} brandsFilter = {brands} />
                     </div>
                     <div>
-                        <Products category={cat} brandsFilter = {brands} />
+                        <Products category={cat} brandsFilter = {brands}  />
                     </div>
                 </div>
             </div>
