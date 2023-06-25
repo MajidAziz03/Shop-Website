@@ -1,12 +1,9 @@
 import Announcement from '@/Components/announcement/Announcement';
 import Navbar from '@/Components/navbar/Navbar';
 import Products from '@/Components/products/Products';
-import styles from '../styles/productPage.module.scss';
-import { ExpandMore } from '@mui/icons-material';
-import { getProducts, getProductsCategory } from '@/functions/productFunction';
-import { ProductType } from '@/types/productType';
+import styles from '../../styles/productPage.module.scss';
+import { getProductsCategory } from '@/functions/productFunction';
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import ProductFilter from '@/Components/products/productsfilter/ProductFilter';
 
 const ProductsPage = () => {
@@ -29,22 +26,22 @@ const ProductsPage = () => {
         }
     }
 
-    const handleFilters = (e : React.ChangeEvent<HTMLInputElement>) => {
+    const handleFilters = (e: React.ChangeEvent<HTMLInputElement>) => {
         const checked = e.target.checked;
         const value = e.target.value;
-        if(checked && brands.indexOf(value == -1)) {
+        if (checked && brands.indexOf(value == -1)) {
             setBrands([...brands, value])
         }
         else {
             setBrands(brands.filter(item => item !== value))
-        } 
+        }
     }
 
-const handlePriceFilters = (e : React.ChangeEvent<HTMLInputElement>) => {
-    if(e.target.checked) {
-        setPrice(e.target.value)
+    const handlePriceFilters = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.checked) {
+            setPrice(e.target.value)
+        }
     }
-}
 
     return (
         <>
@@ -63,10 +60,10 @@ const handlePriceFilters = (e : React.ChangeEvent<HTMLInputElement>) => {
                 </div>
                 <div className={styles.productPage}>
                     <div style={{ paddingLeft: "78px" }}>
-                        <ProductFilter filters = {handleFilters} brandsFilter = {brands} priceFilters = {handlePriceFilters} price = {price}/>
+                        <ProductFilter filters={handleFilters} brandsFilter={brands} priceFilters={handlePriceFilters} price={price} />
                     </div>
                     <div>
-                        <Products category={cat} brandsFilter = {brands} priceFilters = {price}/>
+                        <Products category={cat} brandsFilter={brands} priceFilters={price} />
                     </div>
                 </div>
             </div>
