@@ -5,7 +5,7 @@ import styles from '../styles/productPage.module.scss';
 import { ExpandMore } from '@mui/icons-material';
 import { getProducts, getProductsCategory } from '@/functions/productFunction';
 import { ProductType } from '@/types/productType';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ProductFilter from '@/Components/products/productsfilter/ProductFilter';
 
@@ -13,6 +13,7 @@ const ProductsPage = () => {
     const [categories, setCategories] = useState<string[]>([])
     const [cat, setCat] = useState<string>('')
     const [brands, setBrands] = useState<Array<string>>([])
+    const [price, setPrice] = useState<string>("")
 
 
     useEffect(() => {
@@ -39,7 +40,11 @@ const ProductsPage = () => {
         } 
     }
 
-
+const handlePriceFilters = (e : React.ChangeEvent<HTMLInputElement>) => {
+    if(e.target.checked) {
+        setPrice(e.target.value)
+    }
+}
 
     return (
         <>
@@ -58,10 +63,10 @@ const ProductsPage = () => {
                 </div>
                 <div className={styles.productPage}>
                     <div style={{ paddingLeft: "78px" }}>
-                        <ProductFilter filters = {handleFilters} brandsFilter = {brands} />
+                        <ProductFilter filters = {handleFilters} brandsFilter = {brands} priceFilters = {handlePriceFilters} price = {price}/>
                     </div>
                     <div>
-                        <Products category={cat} brandsFilter = {brands}  />
+                        <Products category={cat} brandsFilter = {brands} priceFilters = {price}/>
                     </div>
                 </div>
             </div>

@@ -9,10 +9,11 @@ import ReactPaginate from 'react-paginate';
 interface Props {
     category: string;
     fromHome: boolean;
-    brandsFilter : string[]
+    brandsFilter : string[];
+    priceFilters : string;
 }
 
-const Products = ({ category, fromHome, brandsFilter }: Props) => {
+const Products = ({ category, fromHome, brandsFilter, priceFilters }: Props) => {
     const [productsData, setProductsData] = useState<ProductType[]>([])
     const [renderData, setRenderData] = useState<ProductType[]>([])
     const path = useRouter().pathname;
@@ -35,7 +36,6 @@ const Products = ({ category, fromHome, brandsFilter }: Props) => {
     const categoryFilter = () => {
         let results;
         results = renderData;
-
         if (category && category !== 'view') {
             results = results.filter(item => item.category.includes(category))
         }
@@ -45,32 +45,35 @@ const Products = ({ category, fromHome, brandsFilter }: Props) => {
         if (category && category === 'view') {
             results = renderData;
         }
-        // console.log("res", results)
+        if(priceFilters) {
+            if(priceFilters == "Low to High") {
+                let price = results.filter(item => item.price)
+                let sorting = price.sort((a,b) => {
+                    return a.price - b.price;
+                })
+                results = sorting;
+            }
+            else {
+                let price = results.filter(item => item.price)
+                let sorting = price.sort((a,b) => {
+                    return b.price - a.price;
+                })
+                results = sorting;
+            }
+        }
         setProductsData(results)
     }
 
-    // const brandFilteration = () => {
-    //     let results;
-    //     results = renderData;
-
-    //     if (brandsFilter) {
-    //         results = results.filter(item => brandsFilter.includes(item.brand))
-    //     }
-    //     if(brandsFilter.length == 0) {
-    //         results = renderData;
-    //     }
-    //     setProductsData(results)
-    // }
-
     useEffect(() => {
         categoryFilter()
-        // brandFilteration()
-    }, [category, brandsFilter])
+    }, [category, brandsFilter, priceFilters])
 
     const handlePageClick = (event: any) => {
         const newOffset = (event.selected * itemsPerPage) % productsData.length;
         setItemOffset(newOffset);
     };
+
+    
 
     return (
         <>

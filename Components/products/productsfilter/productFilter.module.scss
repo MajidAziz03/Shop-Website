@@ -32,6 +32,24 @@
         .filterBrand {
             display: flex;
             gap: 5px;
+
+            span {
+                padding: 10px;
+                background-color: #222;
+                color: white;
+                width: 10%;
+                border-radius: 5px;
+                cursor: pointer;
+
+                &:hover {
+                    opacity: 0.7;
+                }
+
+                &:active {
+                    opacity: 1;
+                }
+            }
+
         }
     }
 }

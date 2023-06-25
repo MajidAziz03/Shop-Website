@@ -1,14 +1,16 @@
     import { ArrowDownward, ExpandMore } from '@mui/icons-material';
     import styles from './productFilter.module.scss';
     import { useState } from 'react';
-import { brand_filters } from '@/types/productType';
+import { brand_filters, price_filters } from '@/types/productType';
 
 interface I_Props {
   filters : (e: React.ChangeEvent<HTMLInputElement>) => void;
-  brandsFilter : string[]
+  brandsFilter : string[];
+  priceFilters : (e: React.ChangeEvent<HTMLInputElement>) => void;
+  price : string;
 }
 
-    const ProductFilter = ({filters,brandsFilter} : I_Props) => {
+    const ProductFilter = ({filters,brandsFilter, priceFilters,price} : I_Props) => {
       const [brandCollapse, setBrandCollapse] = useState(false)
       const [priceCollapse, setPriceCollapse] = useState(false)
       const [ratingCollapse, setRatingCollapse] = useState(false)
@@ -81,10 +83,16 @@ interface I_Props {
             priceCollapse
             &&
             <div className={styles.expanded} onMouseLeave={() => { handleMouseLeave("price") }}>
-              <div className={styles.filterBrand}>
-                <span> Low To High </span>
-                <span> High to Low </span>
-              </div>
+              {
+                price_filters.map((item, i) => (
+                  <>
+                    <div key={i} className={styles.filterBrand}>
+                      <input type="radio" name="price" className={styles.checkbox} id={`products_${i}`} value={item} onChange={priceFilters} />
+                      <label htmlFor={`products_${i}`}> {item} </label>
+                    </div>
+                  </>
+                ))
+              }
             </div>
           }
           {
