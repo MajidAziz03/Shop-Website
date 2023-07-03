@@ -3,32 +3,42 @@ import styles from './login.module.scss';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { RootState } from '@/redux/store/store';
 import { userSuccess } from '@/redux/slices/userSlice';
+import { useRouter } from 'next/router';
 
 const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
-    const userToken = useAppSelector((state : RootState) => state.user.user.token) 
+    const user = useAppSelector((state: RootState) => state.user.user.token)
     const disptach = useAppDispatch()
+    const router = useRouter()
 
-const LoginUser = async (email: string, password: string) => {
-    try {
-        const res = await fetch('https://dummyjson.com/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                username: email,
-                password: password,
+    const LoginUser = async (email: string, password: string) => {
+        try {
+            const res = await fetch('https://dummyjson.com/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: email,
+                    password: password,
+                })
             })
-        })
-        const response = await res.json()
-        disptach(userSuccess(response))
-        
+            const response = await res.json()
+            if (response) {
+                disptach(userSuccess(response))
+                router.push("/")
+            }
+        }
+        catch (error: any) {
+            console.log("error", error)
+        }
     }
-    catch (error : any) {
-        console.log("error", error)
-    }
-}
+
+    useEffect(() => {
+        if (user) {
+            router.replace("/")
+        }
+    }, [])
 
     return (
         <div className={styles.wrapper}>
@@ -44,7 +54,7 @@ const LoginUser = async (email: string, password: string) => {
                         <input type="password" onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <div className={styles.btnWrapper}>
-                        <button onClick={() => {LoginUser(email, password)}}> Login </button>
+                        <button onClick={() => { LoginUser(email, password) }}> Login </button>
                     </div>
                 </div>
             </div>

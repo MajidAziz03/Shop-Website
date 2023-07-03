@@ -48,7 +48,7 @@ interface I_Props {
       return (
         <div className={styles.productsFilter}>
           <div className={styles.categoryholder}>
-            <div className={styles.singleWrapper} onMouseEnter={() => { handleMouseEnter("brand") }}>
+            <div className={styles.singleWrapper} onMouseEnter={() => { handleMouseEnter("brand") }} >
               <span> Brand </span>
               <span><ExpandMore /></span>
             </div>
