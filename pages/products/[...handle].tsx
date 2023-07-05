@@ -45,8 +45,8 @@ const SingleProductPage = () => {
                     <div className={styles.info}>
                         <h2 className={styles.title}> {product.title} </h2>
                         <div className={styles.priceWrapper}>
-                            <span className={styles.price_original}> RS: {product.price} </span>
-                            <span className={styles.price_discount}> {product.discountPercentage} </span>
+                            <span className={styles.price_original}> RS: {(product.price - (product.discountPercentage / 100)).toFixed(2)}  </span>
+                            <span className={styles.price_discount}> {product.price}  </span>
                         </div>
                         <p className={styles.description}> {product.description} </p>
                         <button className={styles.cart_btn}> Add to cart </button>

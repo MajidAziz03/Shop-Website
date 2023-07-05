@@ -3,11 +3,14 @@ import styles from './navbar.module.scss';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useAppSelector } from '@/redux/hooks';
+import { RootState } from '@/redux/store/store';
 
 const Navbar = () => {
     const path = useRouter().pathname;
     const route = useRouter()
     const [navInProducts, setNavInProducts] = useState(false)
+    const user = useAppSelector((state : RootState) => state.user.user.token)
 
     useEffect(() => {
         if (path === '/products') {
@@ -30,8 +33,16 @@ const Navbar = () => {
             <Link style={{textDecoration : "none", color : "inherit"}} href={'/'}><h3> LOGO. </h3> </Link>
             </div>
             <div className={styles.right}>
-                <Link style={{textDecoration : "none", color : "inherit"}} href={'/user/login'}><span className={styles.buttonsRight}> LOGIN </span></Link>
-                <span className={styles.buttonsRight}> SIGNUP </span>
+                {
+                    !user
+                    ?
+                    (<>
+                    <Link style={{textDecoration : "none", color : "inherit"}} href={'/user/login'}><span className={styles.buttonsRight}> LOGIN </span></Link>
+                    <Link style={{textDecoration : "none", color : "inherit"}} href={'/user/register'}><span className={styles.buttonsRight}> SIGNUP </span></Link>
+                    </>)
+                    :
+                    <span className={styles.buttonsRight}> LOGOUT </span>
+                }
                 <div className={styles.logoRight}>
                     <ShoppingCart className={styles.iconRight} />
                     <div className={styles.number}>
