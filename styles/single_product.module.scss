@@ -1,0 +1,113 @@
+.singleProduct {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    gap: 22px;
+
+    .left {
+        .leftWrapper {
+            display: flex;
+            gap: 12px;
+        }
+
+        .img_wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-left: 50px;
+            padding-top: 50px;
+            gap: 12px;
+
+            .singleImg {
+                width: 100%;
+                max-width: 200px;
+                height: 200px;
+                object-fit: cover;
+                border-radius: 12px;
+                cursor: pointer;
+            }
+        }
+
+        .main_imgWrapper {
+            padding-top: 50px;
+            height: 100%;
+
+            .main_img {
+                width: 100%;
+                max-width: 430px;
+                overflow: hidden;
+                height: 600px;
+                border-radius: 12px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+
+    .right {
+        padding-top: 50px;
+        padding-left: 50px;
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+
+            .title {
+                font-size: 28px;
+                color: #222;
+                text-transform: capitalize;
+            }
+            .priceWrapper {
+                display: flex;
+                gap: 5px;
+                align-items: center;
+
+                .price_original {
+                    font-size: 25px;
+                    color: green;
+                    font-weight: 500;
+                }
+
+                .price_discount {
+                    font-size: 22px;
+                    color: #cccacc;
+                    text-decoration: line-through;
+                }
+            }
+
+            .description {
+                font-size: 18px;
+                color: #222;
+                flex-wrap: wrap;
+            }
+
+            .cart_btn {
+                color: white;
+                background-color: #222;
+                padding: 5px;
+                width: 100px;
+                height: 35px;
+                border: none;
+                outline: none;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+
+                &:hover {
+                    opacity: 0.8;
+                }
+
+                &:active {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
