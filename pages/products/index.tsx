@@ -5,6 +5,7 @@ import styles from '../../styles/productPage.module.scss';
 import { getProductsCategory } from '@/functions/productFunction';
 import React, { useEffect, useState } from 'react';
 import ProductFilter from '@/Components/products/productsfilter/ProductFilter';
+import BaseLayout from '@/Components/BaseLayout';
 
 const ProductsPage = () => {
     const [categories, setCategories] = useState<string[]>([])
@@ -44,9 +45,7 @@ const ProductsPage = () => {
     }
 
     return (
-        <>
-            <Announcement />
-            <Navbar />
+        <BaseLayout>
             <div className={styles.productWhole}>
                 <div className={styles.sliderProduct}>
                     <div className={styles.categoriesItem} onClick={() => handleCataegoryClick("view")}> View All </div>
@@ -67,7 +66,7 @@ const ProductsPage = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </BaseLayout>
     )
 }
 

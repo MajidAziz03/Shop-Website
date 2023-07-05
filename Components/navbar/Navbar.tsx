@@ -1,15 +1,17 @@
 import { Search, ShoppingCart } from '@mui/icons-material';
 import styles from './navbar.module.scss';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 const Navbar = () => {
     const path = useRouter().pathname;
+    const route = useRouter()
+    const [navInProducts, setNavInProducts] = useState(false)
 
     useEffect(() => {
         if (path === '/products') {
-            document.getElementById("navbar").style.background = "#948f8fc1";
+            setNavInProducts(true)
         }
         else {
             return;
@@ -17,10 +19,10 @@ const Navbar = () => {
     }, [path])
 
     return (
-        <div className={styles.navbar} id='navbar'>
+        <div className={styles.navbar} id='navbar' style={navInProducts ? {background : "#78bc24",} : {}}>
             <div className={styles.left}>
-                <div className={styles.search}>
-                    <input type="text" placeholder='Search Product' />
+                <div className={styles.search} style={navInProducts ? {display : "none"} : {}}>
+                    <input type="text" placeholder='Search Product'  />
                     <span className={styles.iconSearch}><Search className={styles.searchIcon} /> </span>
                 </div>
             </div>

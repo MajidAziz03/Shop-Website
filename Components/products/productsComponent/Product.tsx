@@ -1,10 +1,11 @@
 import { Star } from '@mui/icons-material';
 import styles from './Product.module.scss';
 import { ProductType } from '@/types/productType';
+import Link from 'next/link';
 
 const Product = ({products} : ProductType) => {
     return (
-        <div className={styles.product}>
+        <Link href={`/products/${products.id}`}><div className={styles.product}>
             <div className={styles.image}>
                 <img src={products.thumbnail} alt="" />
             </div>
@@ -23,6 +24,7 @@ const Product = ({products} : ProductType) => {
                 <span className={styles.brand}>{products.brand}</span>
             </div>
         </div>
+        </Link>
     )
 }
 
