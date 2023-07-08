@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './register.module.scss';
-import Stepper from './Stepper';
+import Stepper from '../stepper/Stepper';
 
 const Register = () => {
     return (
