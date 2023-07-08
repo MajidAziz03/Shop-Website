@@ -2,13 +2,14 @@ import styles from './featuredComp.module.scss';
 
 interface Props { 
     img : string;
+    title  : string;
 }
 
-const FeaturedComp = ({img} : Props) => {
+const FeaturedComp = ({img, title} : Props) => {
     return (
         <div className={styles.wrapper} style={{backgroundImage : `url(${img})`}}>
             <div className={styles.info}>
-                <span> SHIRT STYLE </span>
+                <span> {title} </span>
                 <button> SHOP NOW </button>
             </div>
         </div>
