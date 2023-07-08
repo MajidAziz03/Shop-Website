@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './login.module.scss';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { RootState } from '@/redux/store/store';
-import { userSuccess } from '@/redux/slices/userSlice';
+import { isFetching, userSuccess } from '@/redux/slices/userSlice';
 import { useRouter } from 'next/router';
 
 const Login = () => {
