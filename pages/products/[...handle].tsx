@@ -3,10 +3,12 @@ import styles from '../../styles/single_product.module.scss';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import BaseLayout from '@/Components/BaseLayout';
+import FsLightbox from "fslightbox-react";
 
 const SingleProductPage = () => {
     const router = useRouter();
     const [product, setProduct] = useState<any>({})
+    const [toggler, setToggler] = useState(false);
 
     const id = router.query && router.query.handle;
 
@@ -34,7 +36,7 @@ const SingleProductPage = () => {
                                 )
                             })}
                         </div>
-                        <div className={styles.main_imgWrapper}>
+                        <div className={styles.main_imgWrapper} onClick={() => setToggler(!toggler)} style={{cursor : "pointer"}}>
                             <div className={styles.main_img}>
                                 <img src={product.thumbnail} alt="" />
                             </div>
@@ -53,6 +55,11 @@ const SingleProductPage = () => {
                     </div>
                 </div>
             </div>
+            <FsLightbox
+                    toggler={toggler}
+                    sources={product.images?.map((item : any) => item)}
+                    type="image"
+            />
         </BaseLayout>
     )
 }
