@@ -73,8 +73,6 @@ const Products = ({ category, fromHome, brandsFilter, priceFilters }: Props) => 
         setItemOffset(newOffset);
     };
 
-    
-
     return (
         <>
             <div className={styles.products}>

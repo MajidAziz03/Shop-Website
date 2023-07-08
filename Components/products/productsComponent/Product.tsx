@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const Product = ({products} : ProductType) => {
     return (
-        <Link href={`/products/${products.id}`}><div className={styles.product}>
+        <Link  href={`/products/${products.id}`} style={{textDecoration : "none", color : "inherit"}} ><div className={styles.product}>
             <div className={styles.image}>
                 <img src={products.thumbnail} alt="" />
             </div>

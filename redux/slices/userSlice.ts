@@ -29,10 +29,13 @@ export const userSlice = createSlice({
         },
         userFailure : (state) => {
             state.isError = true;
+        },
+        userLogout : (state) => {
+            state.user = {};
         }
     },
 })
 
-export const {isFetching , userSuccess, userFailure} = userSlice.actions
+export const {isFetching , userSuccess, userFailure,userLogout} = userSlice.actions
 
 export default userSlice.reducer

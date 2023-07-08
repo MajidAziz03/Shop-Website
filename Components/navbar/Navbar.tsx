@@ -3,14 +3,16 @@ import styles from './navbar.module.scss';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { useAppSelector } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { RootState } from '@/redux/store/store';
+import { userLogout } from '@/redux/slices/userSlice';
 
 const Navbar = () => {
     const path = useRouter().pathname;
-    const route = useRouter()
     const [navInProducts, setNavInProducts] = useState(false)
     const user = useAppSelector((state : RootState) => state.user.user.token)
+    const dispatch = useAppDispatch()
+    const router = useRouter()
 
     useEffect(() => {
         if (path === '/products') {
@@ -20,6 +22,11 @@ const Navbar = () => {
             return;
         }
     }, [path])
+
+    const handleLogout = () => {
+        dispatch(userLogout())
+        router.push("/user/login")
+    }
 
     return (
         <div className={styles.navbar} id='navbar' style={navInProducts ? {background : "#78bc24",} : {}}>
@@ -41,7 +48,7 @@ const Navbar = () => {
                     <Link style={{textDecoration : "none", color : "inherit"}} href={'/user/register'}><span className={styles.buttonsRight}> SIGNUP </span></Link>
                     </>)
                     :
-                    <span className={styles.buttonsRight}> LOGOUT </span>
+                    <span className={styles.buttonsRight} onClick={handleLogout}> LOGOUT </span>
                 }
                 <div className={styles.logoRight}>
                     <ShoppingCart className={styles.iconRight} />
