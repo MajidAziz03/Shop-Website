@@ -5,7 +5,6 @@ import Stepper from './Stepper';
 const Register = () => {
     return (
         <>
-        <Stepper step = {1} />
         <div className={styles.register}>
             <div className={styles.wrapper}>
                 <h3> Create Profile </h3>
