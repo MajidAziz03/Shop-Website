@@ -1,7 +1,7 @@
     import { ArrowDownward, ExpandMore } from '@mui/icons-material';
     import styles from './productFilter.module.scss';
     import { useState } from 'react';
-import { brand_filters, price_filters } from '@/types/productType';
+    import { brand_filters, price_filters } from '@/types/filters';
 
 interface I_Props {
   filters : (e: React.ChangeEvent<HTMLInputElement>) => void;
