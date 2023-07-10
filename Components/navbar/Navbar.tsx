@@ -1,4 +1,4 @@
-import { Search, SearchOff, SearchOffOutlined, SearchRounded, ShoppingCart } from '@mui/icons-material';
+import { Menu, Search, SearchOff, SearchOffOutlined, SearchRounded, ShoppingCart } from '@mui/icons-material';
 import styles from './navbar.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -17,6 +17,7 @@ const Navbar = () => {
     const searchValue = useRef<any>()
     const [products, setProducts] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([])
+    const [toggle, setToggle] = useState(false);
 
     useEffect(() => {
         if (path === '/products') {
@@ -50,10 +51,20 @@ const Navbar = () => {
         setFilteredProducts(results);
     }
 
-    const img = "https://images.pexels.com/photos/16963896/pexels-photo-16963896/free-photo-of-celery-juice.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-
     return (
         <div className={styles.navbar} id='navbar' style={navInProducts ? { background: "#78bc24", } : {}}>
+            <Menu onClick={() => setToggle(!toggle)} />
+            <div className={toggle ? `${styles.menu_mobile_hidden} ${styles.menu_mobile_show}` : styles.menu_mobile_hidden}>
+                <div className={styles.menu_links}>
+                    <span> Home </span>
+                    <span> About </span>
+                    <span> Products </span>
+                    <span> Contact </span>
+                    <span className={styles.auth}> Login </span>
+                    <span className={styles.auth}> Signup </span>
+                    <span className={styles.auth}> Logout </span>
+                </div>
+            </div>
             <div className={styles.left}>
                 <div className={styles.search_wrapper}>
                     <div className={styles.search}  style={filteredProducts.length > 0 ? {borderBottom : "none"} : {} } >
