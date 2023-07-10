@@ -45,6 +45,9 @@ const Products = ({ category, fromHome, brandsFilter, priceFilters }: Props) => 
         }
         if (category && category === 'view') {
             results = renderData;
+            if(brandsFilter.length > 0) {
+                results = results.filter(item => brandsFilter.includes(item.brand))
+            }
         }
         if(priceFilters) {
             if(priceFilters == "Low to High") {

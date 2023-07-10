@@ -24,7 +24,7 @@ const ProductsPage = () => {
         if (item !== '' && type !== 'view') {
             setCat(item)
         }
-        if (type === 'view') {
+        else if (type === 'view') {
             setCat("view")
         }
     }
