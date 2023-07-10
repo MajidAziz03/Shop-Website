@@ -91,7 +91,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className={styles.middle}>
-                <Link style={{ textDecoration: "none", color: "inherit" }} href={'/'}><h3> MAJID. </h3> </Link>
+                <Link style={{ textDecoration: "none", color: "inherit" }} href={'/'}><h3> DEMO. </h3> </Link>
             </div>
             <div className={styles.right}>
                 {
