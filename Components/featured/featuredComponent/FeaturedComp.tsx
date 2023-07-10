@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './featuredComp.module.scss';
 
 interface Props { 
@@ -10,7 +11,9 @@ const FeaturedComp = ({img, title} : Props) => {
         <div className={styles.wrapper} style={{backgroundImage : `url(${img})`}}>
             <div className={styles.info}>
                 <span> {title} </span>
+            <Link href={'/products'}>
                 <button> SHOP NOW </button>
+            </Link>
             </div>
         </div>
     )

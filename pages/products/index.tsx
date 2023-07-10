@@ -59,7 +59,7 @@ const ProductsPage = () => {
                 </div>
                 <div className={styles.productPage}>
                     <div style={{ paddingLeft: "78px" }}>
-                        <ProductFilter filters={handleFilters} brandsFilter={brands} priceFilters={handlePriceFilters} price={price} />
+                        <ProductFilter filters={handleFilters} brandsFilter={brands} priceFilter = {price} priceFilters={handlePriceFilters} price={price} />
                     </div>
                     <div>
                         <Products category={cat} brandsFilter={brands} priceFilters={price} />
