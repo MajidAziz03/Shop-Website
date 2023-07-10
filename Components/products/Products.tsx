@@ -5,6 +5,7 @@ import { getProducts, instance, } from '@/functions/productFunction';
 import { ProductType, brand_filters } from '@/types/productType';
 import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
+import { IsTabletFunc, isTablet } from '@/functions/responsive';
 
 interface Props {
     category: string;
@@ -90,10 +91,10 @@ const Products = ({ category, fromHome, brandsFilter, priceFilters }: Props) => 
                 !fromHome
                 &&
                 <ReactPaginate
+                    pageRangeDisplayed={5}
                     breakLabel="..."
                     nextLabel="next >"
                     onPageChange={handlePageClick}
-                    pageRangeDisplayed={5}
                     pageCount={pageCount}
                     previousLabel="< previous"
                     renderOnZeroPageCount={null}

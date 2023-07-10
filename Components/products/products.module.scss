@@ -30,6 +30,10 @@
     gap: 12px;
     list-style: none;
 
+    @media screen and (max-width : 768px) {
+        overflow: hidden;
+    }
+
     .activeLink {
         padding: 8px 10px;
         border-radius: 2px;

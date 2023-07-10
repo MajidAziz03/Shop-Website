@@ -24,5 +24,15 @@
         display: flex;
         flex-direction: column;
         gap: 22px;
+
+        @media screen and (max-width : 768px) {
+            flex: 0;
+        }
     }
+}
+
+.products_mobile {
+    width: 100%;
+    min-height: 100vh;
+    height: max-content;
 }

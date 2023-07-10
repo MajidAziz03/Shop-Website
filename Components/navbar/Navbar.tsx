@@ -53,12 +53,12 @@ const Navbar = () => {
 
     return (
         <div className={styles.navbar} id='navbar' style={navInProducts ? { background: "#78bc24", } : {}}>
-            <Menu onClick={() => setToggle(!toggle)} />
+            <Menu onClick={() => setToggle(!toggle)} className={styles.menuIconBar} />
             <div className={toggle ? `${styles.menu_mobile_hidden} ${styles.menu_mobile_show}` : styles.menu_mobile_hidden}>
                 <div className={styles.menu_links}>
                     <span> Home </span>
                     <span> About </span>
-                    <span> Products </span>
+                    <Link style={{ textDecoration: "none", color: "inherit" }} href={'/products'}><span> Products </span></Link>
                     <span> Contact </span>
                     <span className={styles.auth}> Login </span>
                     <span className={styles.auth}> Signup </span>
@@ -91,7 +91,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className={styles.middle}>
-                <Link style={{ textDecoration: "none", color: "inherit" }} href={'/'}><h3> LOGO. </h3> </Link>
+                <Link style={{ textDecoration: "none", color: "inherit" }} href={'/'}><h3> MAJID. </h3> </Link>
             </div>
             <div className={styles.right}>
                 {

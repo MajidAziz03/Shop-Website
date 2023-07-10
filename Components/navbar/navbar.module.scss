@@ -16,6 +16,13 @@
         position: relative;
     }
 
+    .menuIconBar {
+        display: none;
+        @media screen and (max-width : 768px) {
+            display: block;
+        }
+    }
+
     .menu_mobile_hidden {
         display: none;
         .menu_links {
