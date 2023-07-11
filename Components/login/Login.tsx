@@ -2,35 +2,25 @@ import React, { useEffect, useState } from 'react'
 import styles from './login.module.scss';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { RootState } from '@/redux/store/store';
-import { isFetching, userSuccess } from '@/redux/slices/userSlice';
+import { isFetching, userFetching, userSuccess } from '@/redux/slices/userSlice';
 import { useRouter } from 'next/router';
+import { LoginUser } from '@/functions/user';
+import { Progress } from 'reactstrap';
 
 const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [error, setError] = useState("")
     const user = useAppSelector((state: RootState) => state.user.user.token)
     const disptach = useAppDispatch()
     const router = useRouter()
+    const isUserFetching = useAppSelector((state : RootState) => state.user.isLoading)
 
-    const LoginUser = async (email: string, password: string) => {
-        try {
-            const res = await fetch('https://dummyjson.com/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    username: email,
-                    password: password,
-                })
-            })
-            const response = await res.json()
-            if (response) {
-                disptach(userSuccess(response))
-                router.push("/")
-            }
-        }
-        catch (error: any) {
-            console.log("error", error)
+    const handle_login = async() => {
+        disptach(userFetching())
+        const res = await LoginUser(email,password)
+        if(res) {
+            disptach(userSuccess(res))
+            router.push("/")
         }
     }
 
@@ -54,7 +44,7 @@ const Login = () => {
                         <input type="password" onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <div className={styles.btnWrapper}>
-                        <button onClick={() => { LoginUser(email, password) }}> Login </button>
+                        <button disabled={isUserFetching} onClick={handle_login}> Login </button>
                     </div>
                 </div>
             </div>

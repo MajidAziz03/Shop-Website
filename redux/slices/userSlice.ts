@@ -27,6 +27,9 @@ export const userSlice = createSlice({
             state.user = action.payload;
             state.isLoading = false;
         },
+        userFetching : (state) => {
+            state.isLoading = true;
+        },
         userFailure : (state) => {
             state.isError = true;
         },
@@ -36,6 +39,6 @@ export const userSlice = createSlice({
     },
 })
 
-export const {isFetching , userSuccess, userFailure,userLogout} = userSlice.actions
+export const {isFetching , userSuccess, userFailure,userLogout, userFetching} = userSlice.actions
 
 export default userSlice.reducer

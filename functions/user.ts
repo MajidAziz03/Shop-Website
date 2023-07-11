@@ -1,11 +1,8 @@
 import { useAppDispatch } from "@/redux/hooks"
 import { userSuccess } from "@/redux/slices/userSlice"
 
-export const LoginUser = (email: string, password: string, message: React.Dispatch<React.SetStateAction<string>>, disptach : any) => {
-    if (email || password == '') {
-        message("Invalid credentials")
-    }
-    else {
+export const LoginUser = (email: string, password: any) => {
+    try {
         return fetch('https://dummyjson.com/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -13,6 +10,9 @@ export const LoginUser = (email: string, password: string, message: React.Dispat
                 username: email,
                 password: password,
             })
-        }).then(res => res.json())
+        }).then(data => data.json()).then(data => data)
+    }
+    catch (error: any) {
+        console.log("error", error)
     }
 }

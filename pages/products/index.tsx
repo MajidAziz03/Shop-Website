@@ -2,19 +2,18 @@ import Announcement from '@/Components/announcement/Announcement';
 import Navbar from '@/Components/navbar/Navbar';
 import Products from '@/Components/products/Products';
 import styles from '../../styles/productPage.module.scss';
-import { getProductsCategory } from '@/functions/productFunction';
+import { getProducts, getProductsCategory } from '@/functions/productFunction';
 import React, { useEffect, useState } from 'react';
 import ProductFilter from '@/Components/products/productsfilter/ProductFilter';
 import BaseLayout from '@/Components/BaseLayout';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-const ProductsPage = () => {
+const ProductsPage = ({products} : any) => {
     const [categories, setCategories] = useState<string[]>([])
     const [cat, setCat] = useState<string>('')
     const [brands, setBrands] = useState<Array<string>>([])
     const [price, setPrice] = useState<string>("")
     const isTablet = useMediaQuery('(max-width:768px)');
-
 
     useEffect(() => {
         getProductsCategory().then(data => setCategories(data))
@@ -75,6 +74,15 @@ const ProductsPage = () => {
             }
         </BaseLayout>
     )
+}
+
+export const getServerSideProps = async () => {
+    const data =  await getProducts()
+    return {
+        props : {
+            products : data,
+        }
+    }
 }
 
 export default ProductsPage;
