@@ -15,14 +15,6 @@ export default function Home() {
   const user = useAppSelector((state : RootState) => state.user.user.token) 
   const router = useRouter()
 
-  useEffect(() => {
-    if(!user) {
-      router.replace("/user/login")
-    }
-  }, [])
-
-
-
   return (
     <>
       <Announcement />

@@ -16,11 +16,6 @@ const BaseLayout = (props: any) => {
         }
     }, [route])
 
-    useEffect(() => {
-        if (!user) {
-            route.push("/user/login")
-        }
-    }, [user])
     return (
         <>
             {!announceInProducts && <Announcement />}
