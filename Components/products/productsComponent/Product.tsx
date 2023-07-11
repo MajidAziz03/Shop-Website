@@ -3,7 +3,7 @@ import styles from './Product.module.scss';
 import { ProductType } from '@/types/productType';
 import Link from 'next/link';
 
-const Product = ({products} : ProductType) => {
+const Product = ({products} : any) => {
     return (
         <Link  href={`/products/${products.id}`} style={{textDecoration : "none", color : "inherit"}} ><div className={styles.product}>
             <div className={styles.image}>

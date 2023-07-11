@@ -15,8 +15,28 @@ const ProductsPage = ({products, render, categories} : any) => {
     const [cat, setCat] = useState<string>('')
     const [brands, setBrands] = useState<Array<string>>([])
     const [price, setPrice] = useState<string>("")
-    const isTablet = useMediaQuery('(max-width:768px)');
+    const [itemOffset, setItemOffset] = useState(0);
+    
+    // pagination
     const route = useRouter()
+    const itemsPerPage = 12;
+    const endOffset = itemOffset + itemsPerPage;
+    const paginatedProducts = renderData.length > 0 && renderData.slice(itemOffset, endOffset);
+    const pageCount = Math.ceil(renderData.length / itemsPerPage);
+
+    useEffect(() => {
+        if(route.pathname === "/") {
+            setProductsData(products.slice(0,8))
+        }
+        else {
+            setProductsData(products)
+            setRenderData(products)
+        }
+    }, [])
+
+    useEffect(() => {
+        categoryFilter()
+    }, [cat, brands, price])
 
     const handleCataegoryClick = (item: string, type: string) => {
         if (item !== '' && type !== 'view') {
@@ -44,6 +64,45 @@ const ProductsPage = ({products, render, categories} : any) => {
         }
     }
 
+    const categoryFilter = () => {
+        let results;
+        results = products;
+        if (cat && cat !== 'view') {
+            results = results.filter(item => item.category.includes(cat))
+        }
+        if(brands && brands.length > 0) {
+            results = results.filter(item => brands.includes(item.brand))
+        }
+        if (cat && cat === 'view') {
+            results = products;
+            if(brands.length > 0) {
+                results = results.filter(item => brands.includes(item.brand))
+            }
+        }
+        if(price) {
+            if(price == "Low to High") {
+                let price = results.filter(item => item.price)
+                let sorting = price.sort((a,b) => {
+                    return a.price - b.price;
+                })
+                results = sorting;
+            }
+            else {
+                let price = results.filter(item => item.price)
+                let sorting = price.sort((a,b) => {
+                    return b.price - a.price;
+                })
+                results = sorting;
+            }
+        }
+        setRenderData(results)
+    }
+
+    const handlePageClick = (event: any) => {
+        const newOffset = (event.selected * itemsPerPage) % productsData.length;
+        setItemOffset(newOffset);
+    };
+
     return (
         <BaseLayout>
             <div className={styles.productWhole}>
@@ -61,7 +120,7 @@ const ProductsPage = ({products, render, categories} : any) => {
                     <div style={{ paddingLeft: "78px" }}>
                         <ProductFilter filters={handleFilters} brandsFilter={brands} priceFilter = {price} priceFilters={handlePriceFilters} price={price} />
                     </div>
-                    <div> <Products category={cat} brandsFilter={brands} priceFilters={price} /> </div>
+                    <div> <Products paginatedProducts = {paginatedProducts} pageClicked = {handlePageClick} pageCount = {pageCount} category={cat} brandsFilter={brands} priceFilters={price} /> </div>
                 </div>
             </div>
         </BaseLayout>
@@ -73,11 +132,12 @@ export const getServerSideProps = async () => {
     const categories = await getProductsCategory()
     return {
         props : {
-            productsData : data,
-            renderData : data,
+            products : data,
+            render : data,
             categories : categories
         }
     }
 }
+
 
 export default ProductsPage;
