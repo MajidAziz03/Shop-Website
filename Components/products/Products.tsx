@@ -12,7 +12,7 @@ const Products = ({paginatedProducts, pageClicked, pageCount,fromHome, rendering
 
     useEffect(() => {
         getProducts().then(data => setData(data.slice(0, 8)))
-    })
+    }, [fromHome])
 
     return (
         <>
