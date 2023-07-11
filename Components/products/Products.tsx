@@ -7,13 +7,6 @@ import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
 import { IsTabletFunc, isTablet } from '@/functions/responsive';
 
-interface I_Props {
-    category: string;
-    fromHome: boolean;
-    brandsFilter : string[];
-    priceFilters : string;
-}
-
 const Products = ({category, fromHome, brandsFilter, priceFilters } : any) => {
     const [productsData, setProductsData] = useState<ProductType[]>([])
     const [renderData, setRenderData] = useState<ProductType[]>([])

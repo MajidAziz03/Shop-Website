@@ -7,17 +7,16 @@ import React, { useEffect, useState } from 'react';
 import ProductFilter from '@/Components/products/productsfilter/ProductFilter';
 import BaseLayout from '@/Components/BaseLayout';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useRouter } from 'next/router';
 
-const ProductsPage = ({products} : any) => {
-    const [categories, setCategories] = useState<string[]>([])
+const ProductsPage = ({products, render, categories} : any) => {
+    const [productsData, setProductsData] = useState<any[]>([])
+    const [renderData, setRenderData] = useState<any[]>([])
     const [cat, setCat] = useState<string>('')
     const [brands, setBrands] = useState<Array<string>>([])
     const [price, setPrice] = useState<string>("")
     const isTablet = useMediaQuery('(max-width:768px)');
-
-    useEffect(() => {
-        getProductsCategory().then(data => setCategories(data))
-    }, [])
+    const route = useRouter()
 
     const handleCataegoryClick = (item: string, type: string) => {
         if (item !== '' && type !== 'view') {
@@ -47,13 +46,11 @@ const ProductsPage = ({products} : any) => {
 
     return (
         <BaseLayout>
-        {!isTablet
-        ?
             <div className={styles.productWhole}>
                 <div className={styles.sliderProduct}>
                     <div className={styles.categoriesItem} onClick={() => handleCataegoryClick("view")}> View All </div>
                     {
-                        categories.map((item) => (
+                        categories.map((item : any) => (
                             <>
                                 <div className={styles.categoriesItem} onClick={() => { handleCataegoryClick(item) }}> {item} </div>
                             </>
@@ -67,20 +64,18 @@ const ProductsPage = ({products} : any) => {
                     <div> <Products category={cat} brandsFilter={brands} priceFilters={price} /> </div>
                 </div>
             </div>
-            :
-            <div className={styles.products_mobile}> 
-                <Products category={cat} brandsFilter={brands} priceFilters={price} /> 
-            </div>
-            }
         </BaseLayout>
     )
 }
 
 export const getServerSideProps = async () => {
     const data =  await getProducts()
+    const categories = await getProductsCategory()
     return {
         props : {
-            products : data,
+            productsData : data,
+            renderData : data,
+            categories : categories
         }
     }
 }

@@ -23,6 +23,6 @@ export const getProductsCategory = async() => {
         return updated;
     }
     catch(error) {
-        console.log("error", error)
+        console.log("error", error);
     }
 }
