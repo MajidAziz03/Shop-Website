@@ -16,6 +16,7 @@ const ProductsPage = ({products, render, categories} : any) => {
     const [brands, setBrands] = useState<Array<string>>([])
     const [price, setPrice] = useState<string>("")
     const [itemOffset, setItemOffset] = useState(0);
+    const [fromHome, setFromHome] = useState(false)
     
     // pagination
     const route = useRouter()
@@ -120,7 +121,7 @@ const ProductsPage = ({products, render, categories} : any) => {
                     <div style={{ paddingLeft: "78px" }}>
                         <ProductFilter filters={handleFilters} brandsFilter={brands} priceFilter = {price} priceFilters={handlePriceFilters} price={price} />
                     </div>
-                    <div> <Products paginatedProducts = {paginatedProducts} pageClicked = {handlePageClick} pageCount = {pageCount} category={cat} brandsFilter={brands} priceFilters={price} /> </div>
+                    <div> <Products rendering={products} fromHome={fromHome} paginatedProducts = {paginatedProducts} pageClicked = {handlePageClick} pageCount = {pageCount} category={cat} brandsFilter={brands} priceFilters={price} /> </div>
                 </div>
             </div>
         </BaseLayout>
