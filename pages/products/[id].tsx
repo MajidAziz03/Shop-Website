@@ -14,7 +14,7 @@ const SingleProductPage = ({singleProduct} : any) => {
                 <div className={styles.left}>
                     <div className={styles.leftWrapper}>
                         <div className={styles.img_wrapper}>
-                            {singleProduct.images.map((item: any) => {
+                            {singleProduct.images.slice(0,3).map((item: any) => {
                                 return (
                                     <>
                                         <img src={item} alt="" className={styles.singleImg} />
