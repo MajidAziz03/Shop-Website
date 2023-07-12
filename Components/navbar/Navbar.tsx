@@ -51,6 +51,12 @@ const Navbar = () => {
         setFilteredProducts(results);
     }
 
+    const clearFilters = () => {
+        if(filteredProducts.length > 0) {
+            setFilteredProducts([])
+        }
+    }
+
     return (
         <div className={styles.navbar} id='navbar' style={navInProducts ? { background: "#78bc24", } : {}}>
             <Menu onClick={() => setToggle(!toggle)} className={styles.menuIconBar} />
@@ -77,7 +83,7 @@ const Navbar = () => {
                             filteredProducts.length && filteredProducts.map((item : any) => {
                                 return (
                                     <>
-                                    <Link href={`/products/${item.id}`}><div className={styles.single_results}>
+                                    <Link href={`/products/${item.id}`}><div className={styles.single_results} onClick={clearFilters}>
                                         <img src={item.thumbnail} alt="" className={styles.product_img} />
                                         <div className={styles.title}> {item.title} </div>
                                     </div>
