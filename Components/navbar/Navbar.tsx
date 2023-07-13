@@ -18,6 +18,7 @@ const Navbar = () => {
     const [products, setProducts] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([])
     const [toggle, setToggle] = useState(false);
+    const [openInput, setOpenInput] = useState(false);
 
     useEffect(() => {
         if (path === '/products') {
@@ -44,11 +45,25 @@ const Navbar = () => {
             results = results.filter((product  : any) => {
                 return product.title.toLowerCase().includes(searchValue.current)
             })
+            setOpenInput(true)
         }
         else {
             results = [];
+            setOpenInput(false)
         }
         setFilteredProducts(results);
+    }
+
+    const handleBlur = () => {
+        if(openInput) {
+            setOpenInput(false)
+        }
+    }
+
+    const handleFocus = () => {
+        if(filteredProducts.length > 0) {
+            setOpenInput(true)
+        }
     }
 
     const clearFilters = () => {
@@ -74,13 +89,11 @@ const Navbar = () => {
             <div className={styles.left}>
                 <div className={styles.search_wrapper}>
                     <div className={styles.search}  style={filteredProducts.length > 0 ? {borderBottom : "none"} : {} } >
-                        <SearchRounded className={styles.iconSearch} />
-                        <input type="text" placeholder='Search Product' onChange={handleSearchProduct} />
+                        <input type="text" placeholder='Search Product' onChange={handleSearchProduct} onBlur={handleBlur} onFocus={handleFocus} />
                     </div>
                     {filteredProducts.length > 0 && 
                     <div className={styles.filteredResults}>
-                        {
-                            filteredProducts.length && filteredProducts.map((item : any) => {
+                        { openInput && filteredProducts.length && filteredProducts.map((item : any) => {
                                 return (
                                     <>
                                     <Link href={`/products/${item.id}`}><div className={styles.single_results} onClick={clearFilters}>
